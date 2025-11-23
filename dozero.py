@@ -25,3 +25,9 @@ logger2.log("O herói entrou na caverna.")
 
 print(f"\nLogger1 é igual ao Logger2? {logger1 is logger2}") 
 logger1.show_history()
+
+class Weapon:
+    def __init__(self, name, damage, element):
+        self.name = name
+        self.damage = damage
+        self.element = element
