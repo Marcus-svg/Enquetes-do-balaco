@@ -8,7 +8,7 @@ Este projeto simula um sistema corporativo (fictício "Tião do Gás & Cia") que
 O diferencial deste código não é *o que* ele faz, mas **como** ele faz. A arquitetura foi desenhada para seguir os princípios **SOLID** e utilizar padrões **GoF** (Gang of Four) para garantir extensibilidade e manutenção.
 
 ## 🛠️ Tecnologias e Conceitos
-* **Linguagem:** Python 3.x
+* **Linguagem:** Python
 * **Paradigma:** Orientação a Objetos (POO)
 * **Conceitos Chave:** Herança, Polimorfismo, Encapsulamento, Abstração.
 
