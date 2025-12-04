@@ -21,15 +21,15 @@ class printOne:
             print(f"Imprimindo Doc {test}:\n{doc}\n{'-'*30}")
         self.line = []
 
-class RelatorioDraft:
+class ReportDraft:
     def __init__(self):
         self.title = ""
         self.paragraph = []
         self.baseboard = ""
 
-class RelatorioBuilder:
+class ReportBuilder:
     def __init__(self):
-        self.draft = RelatorioDraft()
+        self.draft = ReportDraft()
 
     def set_title(self, text):
         self.draft.title = text
@@ -46,41 +46,41 @@ class RelatorioBuilder:
     def build(self):
         return self.draft
 
-class Exportador(ABC):
+class Exporter(ABC):
     @abstractmethod
-    def exportar(self, draft: RelatorioDraft):
+    def exporter(self, draft: ReportDraft):
         pass
 
-class ExportadorHTML(Exportador):
-    def exportar(self, draft):
+class exporterHTML(Exporter):
+    def exporter(self, draft):
         html = f"<html>\n<h1>{draft.title}</h1>\n<body>"
         for p in draft.paragraph:
             html += f"\n  <p>{p}</p>"
         html += f"\n  <footer>{draft.baseboard}</footer>\n</body>\n</html>"
         return html
 
-class ExportadorTXT(Exportador):
-    def exportar(self, draft):
+class exporterTXT(Exporter):
+    def exporter(self, draft):
         txt = f"=== {draft.title.upper()} ===\n\n"
         for p in draft.paragraph:
             txt += f"{p}\n"
         txt += f"\n--- {draft.baseboard} ---"
         return txt
 
-class ExportadorFactory:
-    def criar_exportador(formato):
-        if formato == "html":
-            return ExportadorHTML()
-        elif formato == "txt":
-            return ExportadorTXT()
+class exporterFactory:
+    def create_exporter(shape):
+        if shape == "html":
+            return exporterHTML()
+        elif shape == "txt":
+            return exporterTXT()
         else:
-            print(f"Formato '{formato}' não suportado. Usando TXT padrão.")
-            return ExportadorTXT()
+            print(f"Formato '{shape}' não suportado. Usando TXT padrão.")
+            return exporterTXT()
 
 if __name__ == "__main__":
     print("=== SISTEMA GERADOR DE RELATÓRIOS TG_CIA_LTA ===\n")
 
-    report_data = (RelatorioBuilder()
+    report_data = (ReportBuilder()
                        .set_title("Relatório Mensal de Vendas")
                        .add_paragraph("O faturamento subiu 22% em relação a outubro.")
                        .add_paragraph("O produto mais vendido foi o 'Botijão P13'.")
@@ -88,14 +88,14 @@ if __name__ == "__main__":
                        .set_baseboard("Tião do gás e cia")
                        .build())
 
-    formato_escolhido = "html"
+    shape_chosen = "html"
     
-    exportador = ExportadorFactory.criar_exportador(formato_escolhido)
+    exporter = exporterFactory.create_exporter(shape_chosen)
 
-    documento_final = exportador.exportar(report_data)
+    final_document = exporter.exporter(report_data)
 
     spooler = printOne()
-    spooler.add_document(documento_final)
+    spooler.add_document(final_document)
 
     spooler.add_document("Lembrete: Reunião às 09h.")
 
